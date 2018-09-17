@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <mpi.h>
 #include "funciones.h"
 
 struct label {
@@ -49,7 +48,7 @@ int main(int argc, char** argv) {
     char* pa = argv[1];
     char* inicio = argv[2];
     char* fin = argv[3];
-    //integrantes(pa);
+    integrantes(pa);
        
   
     int** Metro;
@@ -79,7 +78,7 @@ int main(int argc, char** argv) {
     "VIM","SJU","LGR","SRO","SRA","LCI","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
     "VICUÑA MACKENNA","SANTA JULIA","LA GRANJA","SANTA ROSA","SAN RAMON","LA CISTERNA","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
     "PM","SB","DS","MT","LP","LS","BR","PU","SO","PR","BL","GL","QN","RC","NA","PZ","BE","BQ","PB","SI","IR","NU","RA","CV","AG","SJ","PE","MA","LF","VV",
-    "PLAZA MAIPU","SANTIAGO BUERAS","DEL SOL","MONTE TABOR","LAS PARCELAS","LAGUNA SUR","BARRANCAS","PUDAHUEL","SAN PABLO","LO PRADO","BLANQUEADO","GRUTA DE LOURDES","QUINTA NORMAL","CUMMING","SANTA ANA","PLAZA DE ARMAS","BELLAS ARTES","BAQUEDANO","PARQUE BUSTAMANTE","SANTA ISABEL","IRARRAZAVAL","ÑUBLE","RODRIGO DE ARAYA","CARLOS VALDOVINOS","CAMINO AGRICOLA","SAN JOAQUIN","PEDRERO","MIRADOR","BELLAVISTA DE LA FLORIDA","VICENTE VALDES",
+    "PLAZA DE MAIPU","SANTIAGO BUERAS","DEL SOL","MONTE TABOR","LAS PARCELAS","LAGUNA SUR","BARRANCAS","PUDAHUEL","SAN PABLO","LO PRADO","BLANQUEADO","GRUTA DE LOURDES","QUINTA NORMAL","CUMMING","SANTA ANA","PLAZA DE ARMAS","BELLAS ARTES","BAQUEDANO","PARQUE BUSTAMANTE","SANTA ISABEL","IRARRAZAVAL","ÑUBLE","RODRIGO DE ARAYA","CARLOS VALDOVINOS","CAMINO AGRICOLA","SAN JOAQUIN","PEDRERO","MIRADOR","BELLAVISTA DE LA FLORIDA","VICENTE VALDES",
     "CER","LVA","PAC","FRA","BIO","NUB","ESN","NUO","ISU","LEN","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0",
     "CERRILLOS","LO VALLEDOR","PEDRO AGUIRRE CERDA","FRANKLIN","BIO BIO","ÑUBLE","ESTADIO NACIONAL","ÑUÑOA","INES DE SUAREZ","LOS LEONES","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0"
     };
@@ -87,18 +86,9 @@ int main(int argc, char** argv) {
         Metro[i] = (int *)malloc(columnas * sizeof(int));
     }
     char* rightStr = "-f";
-    char* leftStr = "-v";
+   
     if (strcmp(pa,rightStr)==0)
     {
-        cout<<endl;
-        cout<<"*******************"<<endl;
-        cout<<"OPCIONES ELEGIDAS DE ESTACIONES"<<endl;
-        cout<<"*******************"<<endl;
-     //PARALELO
-    MPI_Init( &argc, &argv );
-    MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
-    MPI_Comm_rank(MPI_COMM_WORLD,&myid);
-    
     //FUNCION QUE MUESTRA COMO LA ESTACION DE ORIGEN GUARDANDO SU FILA Y SU COLUMNA
     for(y=0;y<12;y++)
     {
@@ -146,17 +136,9 @@ int main(int argc, char** argv) {
     
      Crear_Adyacente(Metro);
     dijkstra(107,Metro,vec_inicio,vec_fin);
-    MPI_Finalize();
+  
     }
-    else if(strcmp(pa,leftStr)==0)
-    {
-          cout<<endl;
-        std::cout<<"*******************INTEGRANTES*******************"<<endl;
-        cout<<"Felipe Campos"<<" - ";
-        cout<<"Eloy Lopez"<<" - ";
-        cout<<"Rodrigo Muñoz"<<endl;
-        cout<<"*************************************************"<<endl;
-    }
+  
     
 }
 void Crear_Adyacente(int** Matriz){
